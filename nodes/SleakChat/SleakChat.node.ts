@@ -22,7 +22,7 @@ export class SleakChat implements INodeType {
 			},
 		],
 		requestDefaults: {
-			baseURL: 'https://api.n8n.sleak.chat',
+			baseURL: 'https://api.n8n.sleak.chat/api/v1',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
