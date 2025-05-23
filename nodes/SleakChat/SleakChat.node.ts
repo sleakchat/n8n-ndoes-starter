@@ -96,7 +96,6 @@ export class SleakChat implements INodeType {
 				default: '',
 				description: 'Unique identifier for the visitor',
 				displayOptions: {
-					// the resources and operations to display this element with
 					show: {
 						resource: ['chatCompletions'],
 						operation: ['post'],
@@ -104,7 +103,7 @@ export class SleakChat implements INodeType {
 				},
 			},
 			{
-				displayName: 'Message body',
+				displayName: 'Message Body',
 				name: 'body',
 				type: 'string',
 				required: true,
