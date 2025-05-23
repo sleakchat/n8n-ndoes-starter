@@ -66,7 +66,7 @@ export class SleakChat implements INodeType {
 									placement: 'n8n',
 									chatbot_id: '={{$parameter["chatbot_id"]}}',
 									visitor_id: '={{$parameter["visitor_id"]}}',
-									body: '={{$parameter["body"]}}',
+									message: '={{$parameter["message"]}}',
 								},
 							},
 						},
@@ -104,7 +104,7 @@ export class SleakChat implements INodeType {
 			},
 			{
 				displayName: 'Message Body',
-				name: 'body',
+				name: 'message',
 				type: 'string',
 				required: true,
 				default: '',
