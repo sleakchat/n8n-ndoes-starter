@@ -39,10 +39,6 @@ export class SleakChat implements INodeType {
 						name: 'Chat Completion',
 						value: 'chatCompletions',
 					},
-					// {
-					// 	name: 'Ticketing',
-					// 	value: 'ticketing',
-					// },
 				],
 				default: 'chatCompletions',
 			},
@@ -79,14 +75,13 @@ export class SleakChat implements INodeType {
 				default: 'post',
 			},
 			{
-				displayName: 'Chatbot ID', // The value the user sees in the UI
-				name: 'chatbot_id', // The name used to reference the element UI within the code
+				displayName: 'Chatbot ID',
+				name: 'chatbot_id',
 				type: 'string',
-				required: true, // Whether the field is required or not
+				required: true,
 				default: '',
 				description: 'Unique identifier for your agent within Sleak',
 				displayOptions: {
-					// the resources and operations to display this element with
 					show: {
 						resource: ['chatCompletions'],
 						operation: ['post'],
@@ -94,10 +89,10 @@ export class SleakChat implements INodeType {
 				},
 			},
 			{
-				displayName: 'Visitor ID', // The value the user sees in the UI
-				name: 'visitor_id', // The name used to reference the element UI within the code
+				displayName: 'Visitor ID',
+				name: 'visitor_id',
 				type: 'string',
-				required: true, // Whether the field is required or not
+				required: true,
 				default: '',
 				description: 'Unique identifier for the visitor',
 				displayOptions: {
@@ -109,49 +104,19 @@ export class SleakChat implements INodeType {
 				},
 			},
 			{
-				displayName: 'Message body', // The value the user sees in the UI
-				name: 'body', // The name used to reference the element UI within the code
+				displayName: 'Message body',
+				name: 'body',
 				type: 'string',
-				required: true, // Whether the field is required or not
+				required: true,
 				default: '',
 				description: 'Message to send to the agent',
 				displayOptions: {
-					// the resources and operations to display this element with
 					show: {
 						resource: ['chatCompletions'],
 						operation: ['post'],
 					},
 				},
 			},
-			// {
-			// 	displayName: 'Additional Fields',
-			// 	name: 'additionalFields',
-			// 	type: 'collection',
-			// 	default: {},
-			// 	placeholder: 'Add Field',
-			// 	displayOptions: {
-			// 		show: {
-			// 			resource: ['chatCompletions'],
-			// 			operation: ['post'],
-			// 		},
-			// 	},
-			// 	options: [
-			// 		{
-			// 			displayName: 'Date',
-			// 			name: 'apodDate',
-			// 			type: 'dateTime',
-			// 			default: '',
-			// 			routing: {
-			// 				request: {
-			// 					// You've already set up the URL. qs appends the value of the field as a query string
-			// 					qs: {
-			// 						date: '={{ new Date($value).toISOString().substr(0,10) }}',
-			// 					},
-			// 				},
-			// 			},
-			// 		},
-			// 	],
-			// },
 		],
 	};
 }
