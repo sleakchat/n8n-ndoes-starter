@@ -22,7 +22,7 @@ export class SleakChat implements INodeType {
 			},
 		],
 		requestDefaults: {
-			baseURL: 'https://api.n8n.sleak.chat/api/v1',
+			baseURL: 'https://api.v1.sleak.chat/api',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
@@ -36,43 +36,65 @@ export class SleakChat implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Chat Completion',
-						value: 'chatCompletions',
+						name: 'Send Message',
+						value: 'sendMessage',
+					},
+					{
+						name: 'Create Conversation',
+						value: 'createConversation',
 					},
 				],
-				default: 'chatCompletions',
+				default: 'sendMessage',
 			},
 			{
 				displayName: 'Operation',
 				name: 'operation',
 				type: 'options',
 				noDataExpression: true,
-				displayOptions: {
-					show: {
-						resource: ['chatCompletions'],
-					},
-				},
 				options: [
 					{
 						name: 'Post',
 						value: 'post',
-						action: 'Chat completion',
-						description: 'Perform a chat completion',
-						routing: {
-							request: {
-								method: 'POST',
-								url: '/chat',
-								body: {
-									placement: 'n8n',
-									chatbot_id: '={{$parameter["chatbot_id"]}}',
-									visitor_id: '={{$parameter["visitor_id"]}}',
-									message: '={{$parameter["message"]}}',
-								},
-							},
-						},
+						action: 'Post',
 					},
 				],
 				default: 'post',
+			},
+			{
+				displayName: 'Conversation ID',
+				name: 'conversation_id',
+				type: 'string',
+				required: true,
+				default: '',
+				displayOptions: {
+					show: {
+						resource: ['sendMessage'],
+						operation: ['post'],
+					},
+				},
+				routing: {
+					request: {
+						method: 'POST',
+						url: '/message',
+						body: {
+							conversation_id: '={{$parameter["conversation_id"]}}',
+							message: '={{$parameter["message"]}}',
+						},
+					},
+				},
+			},
+			{
+				displayName: 'Message',
+				name: 'message',
+				type: 'string',
+				required: true,
+				default: '',
+				displayOptions: {
+					show: {
+						resource: ['sendMessage'],
+						operation: ['post'],
+					},
+				},
 			},
 			{
 				displayName: 'Chatbot ID',
@@ -80,38 +102,32 @@ export class SleakChat implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'Unique identifier for your agent within Sleak',
 				displayOptions: {
 					show: {
-						resource: ['chatCompletions'],
+						resource: ['createConversation'],
 						operation: ['post'],
+					},
+				},
+				routing: {
+					request: {
+						method: 'POST',
+						url: '/conversation',
+						body: {
+							chatbot_id: '={{$parameter["chatbot_id"]}}',
+							name: '={{$parameter["name"]}}',
+						},
 					},
 				},
 			},
 			{
-				displayName: 'Visitor ID',
-				name: 'visitor_id',
+				displayName: 'Name',
+				name: 'name',
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'Unique identifier for the visitor',
 				displayOptions: {
 					show: {
-						resource: ['chatCompletions'],
-						operation: ['post'],
-					},
-				},
-			},
-			{
-				displayName: 'Message Body',
-				name: 'message',
-				type: 'string',
-				required: true,
-				default: '',
-				description: 'Message to send to the agent',
-				displayOptions: {
-					show: {
-						resource: ['chatCompletions'],
+						resource: ['createConversation'],
 						operation: ['post'],
 					},
 				},
